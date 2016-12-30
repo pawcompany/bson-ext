@@ -713,13 +713,13 @@ Local<Value> BSONDeserializer::DeserializeDocumentInternal() {
 
 	// From JavaScript:
 	// if(object['$id'] != null) object = new DBRef(object['$ref'], object['$id'], object['$db']);
-	if(NanHas(returnObject, DBREF_ID_REF_PROPERTY_NAME)) {
-		Local<Value> argv[] = { NanGet(returnObject, DBREF_REF_PROPERTY_NAME), NanGet(returnObject, DBREF_ID_REF_PROPERTY_NAME), NanGet(returnObject, DBREF_DB_REF_PROPERTY_NAME) };
-		Nan::MaybeLocal<Object> obj = Nan::NewInstance(Nan::New(bson->dbrefConstructor), 3, argv);
-		return obj.ToLocalChecked();
-	} else {
+	// if(NanHas(returnObject, DBREF_ID_REF_PROPERTY_NAME)) {
+	// 	Local<Value> argv[] = { NanGet(returnObject, DBREF_REF_PROPERTY_NAME), NanGet(returnObject, DBREF_ID_REF_PROPERTY_NAME), NanGet(returnObject, DBREF_DB_REF_PROPERTY_NAME) };
+	// 	Nan::MaybeLocal<Object> obj = Nan::NewInstance(Nan::New(bson->dbrefConstructor), 3, argv);
+	// 	return obj.ToLocalChecked();
+	// } else {
 		return returnObject;
-	}
+	// }
 }
 
 Local<Value> BSONDeserializer::DeserializeArray(bool raw) {
